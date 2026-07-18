@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Generator | مولّد رمز QR</title>
+  <meta name="description" content="أداة سريعة وأنيقة لتحويل أي رابط أو نص إلى رمز QR فوراً" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+
+  <main class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-wrap">
+        <div class="logo-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="24" height="24" rx="4" fill="white" fill-opacity="0.15" stroke="white" stroke-width="2"/>
+            <rect x="10" y="10" width="12" height="12" rx="2" fill="white"/>
+            <rect x="36" y="4" width="24" height="24" rx="4" fill="white" fill-opacity="0.15" stroke="white" stroke-width="2"/>
+            <rect x="42" y="10" width="12" height="12" rx="2" fill="white"/>
+            <rect x="4" y="36" width="24" height="24" rx="4" fill="white" fill-opacity="0.15" stroke="white" stroke-width="2"/>
+            <rect x="10" y="42" width="12" height="12" rx="2" fill="white"/>
+            <rect x="36" y="36" width="10" height="10" rx="2" fill="white"/>
+            <rect x="50" y="36" width="10" height="10" rx="2" fill="white"/>
+            <rect x="36" y="50" width="10" height="10" rx="2" fill="white"/>
+            <rect x="50" y="50" width="10" height="10" rx="2" fill="white"/>
+          </svg>
+        </div>
+        <h1 class="logo-text">QR Generator</h1>
+      </div>
+      <p class="tagline">حوّل أي رابط أو نص إلى رمز QR في ثانية واحدة ✨</p>
+    </header>
+
+    <!-- Card -->
+    <section class="card">
+
+      <!-- Input Area -->
+      <div class="input-section">
+        <label for="url-input" class="input-label">الرابط أو النص</label>
+        <div class="input-wrapper" id="input-wrapper">
+          <span class="input-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+          </span>
+          <input
+            type="text"
+            id="url-input"
+            class="url-input"
+            placeholder="https://example.com أو أي نص..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="clear-btn" id="clear-btn" title="مسح" aria-label="مسح">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Options Row -->
+        <div class="options-row">
+          <div class="option-group">
+            <label class="option-label">الحجم</label>
+            <div class="size-buttons">
+              <button class="size-btn active" data-size="200" id="size-sm">S</button>
+              <button class="size-btn" data-size="280" id="size-md">M</button>
+              <button class="size-btn" data-size="360" id="size-lg">L</button>
+            </div>
+          </div>
+          <div class="option-group">
+            <label class="option-label">لون الرمز</label>
+            <div class="color-pickers">
+              <label class="color-wrap" title="لون الرمز">
+                <input type="color" id="fg-color" value="#0f0f1a" />
+                <span class="color-preview" id="fg-preview" style="background:#0f0f1a"></span>
+              </label>
+              <span class="color-sep">↔</span>
+              <label class="color-wrap" title="لون الخلفية">
+                <input type="color" id="bg-color" value="#ffffff" />
+                <span class="color-preview" id="bg-preview" style="background:#ffffff; border: 1px solid #ddd"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button class="generate-btn" id="generate-btn">
+          <span class="btn-text">إنشاء رمز QR</span>
+          <span class="btn-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <!-- QR Output -->
+      <div class="qr-section" id="qr-section">
+        <div class="qr-placeholder" id="qr-placeholder">
+          <div class="placeholder-icon">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect x="8" y="8" width="20" height="20" rx="3" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="36" y="8" width="20" height="20" rx="3" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="8" y="36" width="20" height="20" rx="3" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="36" y="36" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="48" y="36" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="36" y="48" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="48" y="48" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
+            </svg>
+          </div>
+          <p>رمز QR سيظهر هنا</p>
+        </div>
+
+        <div class="qr-result hidden" id="qr-result">
+          <div class="qr-canvas-wrapper" id="qr-canvas-wrapper">
+            <div id="qrcode"></div>
+          </div>
+          <p class="qr-url-label" id="qr-url-label"></p>
+          <div class="action-buttons">
+            <button class="action-btn download-btn" id="download-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              تحميل PNG
+            </button>
+            <button class="action-btn copy-btn" id="copy-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              نسخ
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <footer class="footer">
+      صُنع بـ ❤️ &nbsp;—&nbsp; QR Generator
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
