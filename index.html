@@ -3,24 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QR Generator | مولّد رمز QR</title>
-  <meta name="description" content="أداة سريعة وأنيقة لتحويل أي رابط أو نص إلى رمز QR فوراً" />
+  <title>QR Generator Pro | مولّد رمز QR الاحترافي</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Animated Background -->
+  <!-- Animated background -->
   <div class="bg-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
   </div>
-
-  <!-- Floating particles -->
   <div class="particles" id="particles"></div>
 
   <main class="container">
@@ -30,11 +27,11 @@
       <div class="logo-wrap">
         <div class="logo-icon">
           <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="4" width="24" height="24" rx="4" fill="white" fill-opacity="0.15" stroke="white" stroke-width="2"/>
+            <rect x="4"  y="4"  width="24" height="24" rx="4" fill="white" fill-opacity=".15" stroke="white" stroke-width="2"/>
             <rect x="10" y="10" width="12" height="12" rx="2" fill="white"/>
-            <rect x="36" y="4" width="24" height="24" rx="4" fill="white" fill-opacity="0.15" stroke="white" stroke-width="2"/>
+            <rect x="36" y="4"  width="24" height="24" rx="4" fill="white" fill-opacity=".15" stroke="white" stroke-width="2"/>
             <rect x="42" y="10" width="12" height="12" rx="2" fill="white"/>
-            <rect x="4" y="36" width="24" height="24" rx="4" fill="white" fill-opacity="0.15" stroke="white" stroke-width="2"/>
+            <rect x="4"  y="36" width="24" height="24" rx="4" fill="white" fill-opacity=".15" stroke="white" stroke-width="2"/>
             <rect x="10" y="42" width="12" height="12" rx="2" fill="white"/>
             <rect x="36" y="36" width="10" height="10" rx="2" fill="white"/>
             <rect x="50" y="36" width="10" height="10" rx="2" fill="white"/>
@@ -42,124 +39,336 @@
             <rect x="50" y="50" width="10" height="10" rx="2" fill="white"/>
           </svg>
         </div>
-        <h1 class="logo-text">QR Generator</h1>
+        <div>
+          <h1 class="logo-text">QR Generator <span class="pro-badge">Pro</span></h1>
+        </div>
       </div>
-      <p class="tagline">حوّل أي رابط أو نص إلى رمز QR في ثانية واحدة ✨</p>
+      <p class="tagline">ديزاينات متعددة · لوجوهات جاهزة · تحميل فوري ✨</p>
     </header>
 
-    <!-- Card -->
+    <!-- ═══ Main Config Card ═══ -->
     <section class="card">
 
-      <!-- Input Area -->
-      <div class="input-section">
-        <label for="url-input" class="input-label">الرابط أو النص</label>
+      <!-- ── Section 1: URL ── -->
+      <div class="card-section">
+        <div class="section-hd">
+          <span class="step-num">١</span>
+          <h2 class="section-title">الرابط أو النص</h2>
+        </div>
         <div class="input-wrapper" id="input-wrapper">
           <span class="input-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
               <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
             </svg>
           </span>
-          <input
-            type="text"
-            id="url-input"
-            class="url-input"
-            placeholder="https://example.com أو أي نص..."
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <button class="clear-btn" id="clear-btn" title="مسح" aria-label="مسح">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <input type="text" id="url-input" class="url-input"
+            placeholder="https://example.com  أو أي نص..."
+            autocomplete="off" spellcheck="false" />
+          <button class="clear-btn" id="clear-btn" title="مسح">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
           </button>
         </div>
+      </div>
 
-        <!-- Options Row -->
-        <div class="options-row">
-          <div class="option-group">
-            <label class="option-label">الحجم</label>
-            <div class="size-buttons">
-              <button class="size-btn active" data-size="200" id="size-sm">S</button>
-              <button class="size-btn" data-size="280" id="size-md">M</button>
-              <button class="size-btn" data-size="360" id="size-lg">L</button>
+      <!-- ── Section 2: QR Style ── -->
+      <div class="card-section">
+        <div class="section-hd">
+          <span class="step-num">٢</span>
+          <h2 class="section-title">شكل الرمز</h2>
+        </div>
+        <div class="style-grid" id="style-grid">
+
+          <button class="style-card active" data-style="square">
+            <div class="dot-demo" style="border-radius:0"></div>
+            <span>كلاسيك</span>
+          </button>
+
+          <button class="style-card" data-style="dots">
+            <div class="dot-demo" style="border-radius:50%"></div>
+            <span>دوائر</span>
+          </button>
+
+          <button class="style-card" data-style="rounded">
+            <div class="dot-demo" style="border-radius:28%"></div>
+            <span>مدور</span>
+          </button>
+
+          <button class="style-card" data-style="extra-rounded">
+            <div class="dot-demo" style="border-radius:42%"></div>
+            <span>ناعم</span>
+          </button>
+
+          <button class="style-card" data-style="classy">
+            <div class="dot-demo"
+              style="clip-path:polygon(0 0,68% 0,100% 32%,100% 100%,32% 100%,0 68%);border-radius:0"></div>
+            <span>أنيق</span>
+          </button>
+
+          <button class="style-card" data-style="classy-rounded">
+            <div class="dot-demo"
+              style="clip-path:polygon(15% 0,85% 0,100% 15%,100% 85%,85% 100%,15% 100%,0 85%,0 15%);border-radius:0"></div>
+            <span>أنيق مدور</span>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- ── Section 3: Colors & Size ── -->
+      <div class="card-section">
+        <div class="section-hd">
+          <span class="step-num">٣</span>
+          <h2 class="section-title">الألوان والحجم</h2>
+        </div>
+        <div class="controls-row">
+
+          <!-- Colors -->
+          <div class="ctrl-group">
+            <label class="ctrl-label">لون الرمز</label>
+            <label class="color-pick-wrap" title="لون النقاط">
+              <input type="color" id="fg-color" value="#0f0f1a" />
+              <span class="color-swatch" id="fg-swatch" style="background:#0f0f1a"></span>
+              <span class="ctrl-label-sm">نقاط</span>
+            </label>
+          </div>
+
+          <div class="ctrl-group">
+            <label class="ctrl-label">لون الخلفية</label>
+            <label class="color-pick-wrap" title="لون الخلفية">
+              <input type="color" id="bg-color" value="#ffffff" />
+              <span class="color-swatch" id="bg-swatch" style="background:#ffffff; border:1px solid #ccc"></span>
+              <span class="ctrl-label-sm">خلفية</span>
+            </label>
+          </div>
+
+          <!-- Size -->
+          <div class="ctrl-group">
+            <label class="ctrl-label">الحجم</label>
+            <div class="size-btns">
+              <button class="size-btn active" data-size="200">S</button>
+              <button class="size-btn" data-size="280">M</button>
+              <button class="size-btn" data-size="360">L</button>
             </div>
           </div>
-          <div class="option-group">
-            <label class="option-label">لون الرمز</label>
-            <div class="color-pickers">
-              <label class="color-wrap" title="لون الرمز">
-                <input type="color" id="fg-color" value="#0f0f1a" />
-                <span class="color-preview" id="fg-preview" style="background:#0f0f1a"></span>
-              </label>
-              <span class="color-sep">↔</span>
-              <label class="color-wrap" title="لون الخلفية">
-                <input type="color" id="bg-color" value="#ffffff" />
-                <span class="color-preview" id="bg-preview" style="background:#ffffff; border: 1px solid #ddd"></span>
-              </label>
+
+        </div>
+      </div>
+
+      <!-- ── Section 4: Logo ── -->
+      <div class="card-section">
+        <div class="section-hd">
+          <span class="step-num">٤</span>
+          <h2 class="section-title">اللوجو المركزي</h2>
+        </div>
+        <div class="logo-grid" id="logo-grid">
+
+          <!-- None -->
+          <button class="logo-card active" data-logo="none">
+            <div class="logo-icon-wrap" style="background:#1e293b">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round">
+                <line x1="4" y1="4" x2="20" y2="20"/><circle cx="12" cy="12" r="9"/>
+              </svg>
             </div>
-          </div>
+            <span class="logo-lbl">بدون</span>
+          </button>
+
+          <!-- WhatsApp -->
+          <button class="logo-card" data-logo="whatsapp">
+            <div class="logo-icon-wrap" style="background:#25D366">
+              <img src="https://cdn.simpleicons.org/whatsapp/ffffff" alt="WhatsApp" loading="lazy" />
+            </div>
+            <span class="logo-lbl">واتساب</span>
+          </button>
+
+          <!-- Instagram -->
+          <button class="logo-card" data-logo="instagram">
+            <div class="logo-icon-wrap logo-bg-instagram">
+              <img src="https://cdn.simpleicons.org/instagram/ffffff" alt="Instagram" loading="lazy" />
+            </div>
+            <span class="logo-lbl">إنستجرام</span>
+          </button>
+
+          <!-- Facebook -->
+          <button class="logo-card" data-logo="facebook">
+            <div class="logo-icon-wrap" style="background:#1877F2">
+              <img src="https://cdn.simpleicons.org/facebook/ffffff" alt="Facebook" loading="lazy" />
+            </div>
+            <span class="logo-lbl">فيسبوك</span>
+          </button>
+
+          <!-- Google Reviews -->
+          <button class="logo-card" data-logo="google">
+            <div class="logo-icon-wrap" style="background:#fff; border:1px solid #e5e7eb">
+              <!-- Official 4-color Google G -->
+              <svg width="28" height="28" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+                <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.32-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+                <path fill="#FBBC05" d="M11.68 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.68-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.34-5.7z"/>
+                <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.34 5.7c1.74-5.2 6.59-9.07 12.32-9.07z"/>
+                <path fill="#4285F4" d="M24 19.5h21.12c.26 1.44.4 2.94.4 4.5 0 6.7-2.4 12.34-6.56 16.17H31.85l-7.11-5.52c1.97-1.32 3.94-3.89 4.39-6.64H24V19.5z"/>
+              </svg>
+            </div>
+            <span class="logo-lbl">جوجل ريفيو</span>
+          </button>
+
+          <!-- YouTube -->
+          <button class="logo-card" data-logo="youtube">
+            <div class="logo-icon-wrap" style="background:#FF0000">
+              <img src="https://cdn.simpleicons.org/youtube/ffffff" alt="YouTube" loading="lazy" />
+            </div>
+            <span class="logo-lbl">يوتيوب</span>
+          </button>
+
+          <!-- TikTok -->
+          <button class="logo-card" data-logo="tiktok">
+            <div class="logo-icon-wrap logo-bg-tiktok">
+              <img src="https://cdn.simpleicons.org/tiktok/ffffff" alt="TikTok" loading="lazy" />
+            </div>
+            <span class="logo-lbl">تيك توك</span>
+          </button>
+
+          <!-- X / Twitter -->
+          <button class="logo-card" data-logo="x">
+            <div class="logo-icon-wrap" style="background:#000">
+              <img src="https://cdn.simpleicons.org/x/ffffff" alt="X" loading="lazy" />
+            </div>
+            <span class="logo-lbl">تويتر X</span>
+          </button>
+
+          <!-- Snapchat — yellow bg + white ghost (رسمي) -->
+          <button class="logo-card" data-logo="snapchat">
+            <div class="logo-icon-wrap" style="background:#FFFC00">
+              <img src="https://cdn.simpleicons.org/snapchat/ffffff" alt="Snapchat" loading="lazy" />
+            </div>
+            <span class="logo-lbl">سناب شات</span>
+          </button>
+          <!-- LinkedIn -->
+          <button class="logo-card" data-logo="linkedin">
+            <div class="logo-icon-wrap" style="background:#0A66C2">
+              <img src="https://cdn.simpleicons.org/linkedin/ffffff" alt="LinkedIn" loading="lazy" />
+            </div>
+            <span class="logo-lbl">لينكد إن</span>
+          </button>
+
+          <!-- Vodafone Cash -->
+          <button class="logo-card" data-logo="vodafone">
+            <div class="logo-icon-wrap" style="background:#E60000">
+              <img src="https://cdn.simpleicons.org/vodafone/ffffff" alt="Vodafone" loading="lazy" />
+            </div>
+            <span class="logo-lbl">فودافون كاش</span>
+          </button>
+
+          <!-- Etisalat Cash — الأحمر الرسمي الأصلي -->
+          <button class="logo-card" data-logo="etisalat">
+            <div class="logo-icon-wrap" style="background:#CC0000">
+              <svg viewBox="0 0 60 60" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                <text x="30" y="43" font-size="30" font-family="Arial Black,sans-serif"
+                  font-weight="900" fill="white" text-anchor="middle">e&amp;</text>
+              </svg>
+            </div>
+            <span class="logo-lbl">اتصالات كاش</span>
+          </button>
+
+          <!-- Orange Cash -->
+          <button class="logo-card" data-logo="orange">
+            <div class="logo-icon-wrap" style="background:#FF6600">
+              <img src="https://cdn.simpleicons.org/orange/ffffff" alt="Orange" loading="lazy" />
+            </div>
+            <span class="logo-lbl">أورنج كاش</span>
+          </button>
+
+          <!-- InstaPay — اللوجو الرسمي الأصلي -->
+          <button class="logo-card" data-logo="instapay">
+            <div class="logo-icon-wrap" style="background:#fff; border:1px solid #e5e7eb">
+              <img src="instapay.png" alt="InstaPay" style="width:40px;height:40px;object-fit:contain" />
+            </div>
+            <span class="logo-lbl">إنستاباي</span>
+          </button>
+
+          <!-- PayPal -->
+          <button class="logo-card" data-logo="paypal">
+            <div class="logo-icon-wrap" style="background:#003087">
+              <img src="https://cdn.simpleicons.org/paypal/ffffff" alt="PayPal" loading="lazy" />
+            </div>
+            <span class="logo-lbl">باي بال</span>
+          </button>
+
+          <!-- Custom Upload -->
+          <button class="logo-card logo-upload-card" data-logo="custom" id="custom-logo-card">
+            <div class="logo-icon-wrap" style="background:#4f46e5" id="custom-logo-preview-wrap">
+              <svg id="custom-upload-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <img id="custom-logo-thumb" src="" alt="custom" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:10px" />
+            </div>
+            <span class="logo-lbl">رفع لوجو</span>
+          </button>
+
         </div>
 
+        <!-- Hidden file input -->
+        <input type="file" id="custom-logo-input" accept="image/*" style="display:none" />
+      </div>
+
+      <!-- ── Generate Button ── -->
+      <div class="card-section card-section-btn">
         <button class="generate-btn" id="generate-btn">
-          <span class="btn-text">إنشاء رمز QR</span>
-          <span class="btn-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/>
-            </svg>
-          </span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          <span id="btn-text">إنشاء رمز QR</span>
         </button>
       </div>
 
-      <!-- QR Output -->
-      <div class="qr-section" id="qr-section">
-        <div class="qr-placeholder" id="qr-placeholder">
-          <div class="placeholder-icon">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-              <rect x="8" y="8" width="20" height="20" rx="3" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
-              <rect x="36" y="8" width="20" height="20" rx="3" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
-              <rect x="8" y="36" width="20" height="20" rx="3" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
-              <rect x="36" y="36" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
-              <rect x="48" y="36" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
-              <rect x="36" y="48" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
-              <rect x="48" y="48" width="8" height="8" rx="1.5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/>
-            </svg>
-          </div>
-          <p>رمز QR سيظهر هنا</p>
-        </div>
+    </section>
+    <!-- /card -->
 
-        <div class="qr-result hidden" id="qr-result">
-          <div class="qr-canvas-wrapper" id="qr-canvas-wrapper">
-            <div id="qrcode"></div>
-          </div>
-          <p class="qr-url-label" id="qr-url-label"></p>
-          <div class="action-buttons">
-            <button class="action-btn download-btn" id="download-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              تحميل PNG
-            </button>
-            <button class="action-btn copy-btn" id="copy-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-              </svg>
-              نسخ
-            </button>
-          </div>
-        </div>
+    <!-- ═══ Output ═══ -->
+    <section class="output-card hidden" id="output-card">
+      <div class="qr-display-wrap" id="qr-display-wrap">
+        <div id="qr-canvas-container"></div>
       </div>
-
+      <p class="qr-url-label" id="qr-url-label"></p>
+      <div class="action-row">
+        <button class="action-btn dl-btn" id="download-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          تحميل PNG
+        </button>
+        <button class="action-btn copy-btn" id="copy-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          نسخ الصورة
+        </button>
+        <button class="action-btn share-btn" id="share-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          مشاركة
+        </button>
+      </div>
     </section>
 
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
-    <footer class="footer">
-      صُنع بـ ❤️ &nbsp;—&nbsp; QR Generator
-    </footer>
+    <footer class="footer">صُنع بـ ❤️ &nbsp;—&nbsp; QR Generator Pro</footer>
+
   </main>
 
   <script src="app.js"></script>
