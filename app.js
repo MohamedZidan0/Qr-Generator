@@ -112,7 +112,7 @@
   /* ── State ── */
   let selectedStyle     = 'square';
   let selectedLogo      = 'none';
-  let selectedSize      = 200;
+  let selectedSize      = 400;
   let customLogoDataUrl = null;
   let qrInstance        = null;
   let toastTimer        = null;
@@ -274,8 +274,8 @@
           },
           imageOptions: {
             crossOrigin:        'anonymous',
-            margin:             6,
-            imageSize:          0.32,
+            margin:             2,
+            imageSize:          0.28,
             hideBackgroundDots: true,
           },
           cornersSquareOptions: {
